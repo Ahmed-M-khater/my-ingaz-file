@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ملف الأداء الوظيفي للمعلم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-bg: #f7f6f2;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0ede8;
+  --color-border: #dcd9d5;
+  --color-text: #1e1c18;
+  --color-text-muted: #6b6964;
+  --color-primary: #01696f;
+  --color-primary-hover: #0c4e54;
+  --color-primary-light: #e6f2f2;
+  --color-gold: #b07a00;
+  --color-gold-light: #fdf6e3;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --font: 'Tajawal', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.7; font-size: 16px; }
+
+/* NAV */
+nav {
+  background: var(--color-primary);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(1,105,111,0.3);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.5rem;
+}
+.nav-logo {
+  color: #fff; font-size: 1.1rem; font-weight: 700;
+  padding: 1rem 0; white-space: nowrap;
+}
+.nav-links {
+  display: flex; flex-wrap: wrap; gap: 0.25rem;
+  list-style: none; padding: 0.5rem 0;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.85); text-decoration: none;
+  font-size: 0.82rem; padding: 0.35rem 0.7rem;
+  border-radius: 0.4rem;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  background: rgba(255,255,255,0.18); color: #fff;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #0a5a60 50%, #1a3d40 100%);
+  color: #fff; text-align: center;
+  padding: 5rem 1.5rem 4rem;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 2rem; padding: 0.4rem 1.2rem;
+  font-size: 0.85rem; margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+.hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; margin-bottom: 0.75rem; }
+.hero p { font-size: 1.1rem; opacity: 0.85; max-width: 500px; margin: 0 auto 2rem; }
+.hero-contacts {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+}
+.btn-contact {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.5rem; border-radius: 2rem;
+  font-family: var(--font); font-size: 0.9rem; font-weight: 600;
+  text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer; border: none;
+}
+.btn-wa { background: #25D366; color: #fff; }
+.btn-tg { background: #229ED9; color: #fff; }
+.btn-contact:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+/* INDEX GRID */
+.index-section {
+  max-width: 1100px; margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+.index-section h2 {
+  font-size: 1.4rem; font-weight: 700; color: var(--color-primary);
+  margin-bottom: 1.5rem; padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-primary);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.index-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  text-decoration: none; color: var(--color-text);
+  display: flex; align-items: center; gap: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.index-card:hover {
+  transform: translateY(-3px); box-shadow: var(--shadow-md);
+  border-color: var(--color-primary); color: var(--color-primary);
+}
+.index-card-icon {
+  width: 42px; height: 42px; border-radius: 0.5rem;
+  background: var(--color-primary-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.index-card-title { font-size: 0.88rem; font-weight: 600; line-height: 1.4; }
+
+/* PAGES */
+.page { display: none; }
+.page.active { display: block; }
+
+/* PAGE CONTENT */
+.page-content {
+  max-width: 900px; margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+.page-header {
+  background: var(--color-surface);
+  border-right: 4px solid var(--color-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+.page-header h2 { font-size: 1.5rem; font-weight: 800; color: var(--color-primary); }
+.page-header .page-num {
+  font-size: 0.8rem; color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+/* CARD STYLES */
+.content-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.info-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+.info-item {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+}
+.info-label {
+  font-size: 0.78rem; color: var(--color-text-muted);
+  font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.04em; margin-bottom: 0.4rem;
+}
+.info-value {
+  font-size: 1rem; font-weight: 500; color: var(--color-text);
+  min-height: 1.5rem;
+  border-bottom: 1px dashed var(--color-border);
+  padding-bottom: 0.25rem;
+}
+
+/* SUB-ITEMS LIST */
+.sub-items {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem; margin-top: 0.5rem;
+}
+.sub-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+  text-decoration: none; color: var(--color-text);
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.9rem; font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.sub-item:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  transform: translateX(-3px);
+}
+.sub-item-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--color-primary); flex-shrink: 0;
+}
+
+/* UPLOAD AREA */
+.upload-area {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-top: 1rem;
+  background: var(--color-bg);
+}
+.upload-area p { font-size: 0.9rem; margin-top: 0.5rem; }
+
+/* NAV BTNS */
+.nav-btns {
+  display: flex; gap: 1rem; margin-top: 2rem;
+  flex-wrap: wrap;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-primary);
+  background: transparent; color: var(--color-primary);
+  font-family: var(--font); font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-nav:hover { background: var(--color-primary); color: #fff; }
+.btn-nav.primary { background: var(--color-primary); color: #fff; }
+.btn-nav.primary:hover { background: var(--color-primary-hover); }
+
+/* FOOTER */
+footer {
+  background: #1a3d40; color: rgba(255,255,255,0.7);
+  text-align: center; padding: 2rem 1.5rem;
+  margin-top: 4rem; font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero { padding: 3rem 1rem 2.5rem; }
+  .index-grid { grid-template-columns: 1fr 1fr; }
+  .info-grid { grid-template-columns: 1fr; }
+  .sub-items { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">📋 ملف الأداء الوظيفي</div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">الرئيسية</a></li>
+      <li><a href="#" onclick="showPage('muqadima')" id="nav-muqadima">المقدمة</a></li>
+      <li><a href="#" onclick="showPage('sira')" id="nav-sira">السيرة</a></li>
+      <li><a href="#" onclick="showPage('ruya')" id="nav-ruya">الرؤية</a></li>
+      <li><a href="#" onclick="showPage('ahdaf')" id="nav-ahdaf">الأهداف</a></li>
+      <li><a href="#" onclick="showPage('ada')" id="nav-ada">الأداء</a></li>
+      <li><a href="#" onclick="showPage('khata')" id="nav-khata">الخاتمة</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-badge">📚 وزارة التعليم — المملكة العربية السعودية</div>
+    <h1>ملف الأداء الوظيفي للمعلم</h1>
+    <p>الملف المهني الشامل الذي يعكس كفاءة المعلم وأدائه الوظيفي</p>
+    <div class="hero-contacts">
+      <a href="https://wa.me/qr/76AJFEPVBARTE1" class="btn-contact btn-wa" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        للطلب واتساب
+      </a>
+      <a href="https://t.me/masarplaform" class="btn-contact btn-tg" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        للطلب تيليجرام
+      </a>
+    </div>
+  </div>
+
+  <div class="index-section">
+    <h2>📋 فهرس الملف</h2>
+    <div class="index-grid">
+      <a class="index-card" onclick="showPage('muqadima')">
+        <div class="index-card-icon">📝</div>
+        <div class="index-card-title">المقدمة</div>
+      </a>
+      <a class="index-card" onclick="showPage('sira')">
+        <div class="index-card-icon">👤</div>
+        <div class="index-card-title">السيرة الذاتية</div>
+      </a>
+      <a class="index-card" onclick="showPage('ruya')">
+        <div class="index-card-icon">🎯</div>
+        <div class="index-card-title">الرؤية والرسالة</div>
+      </a>
+      <a class="index-card" onclick="showPage('ahdaf-ama')">
+        <div class="index-card-icon">📌</div>
+        <div class="index-card-title">الأهداف العامة لسياسة التعليم في المملكة</div>
+      </a>
+      <a class="index-card" onclick="showPage('ahdaf-madda')">
+        <div class="index-card-icon">📚</div>
+        <div class="index-card-title">أهداف تدريس المادة</div>
+      </a>
+      <a class="index-card" onclick="showPage('mithaq')">
+        <div class="index-card-icon">⚖️</div>
+        <div class="index-card-title">ميثاق أخلاقيات مهنة التعليم في المملكة</div>
+      </a>
+      <a class="index-card" onclick="showPage('wajibat')">
+        <div class="index-card-icon">✅</div>
+        <div class="index-card-title">أداء الواجبات الوظيفية</div>
+      </a>
+      <a class="index-card" onclick="showPage('mujtama')">
+        <div class="index-card-icon">🤝</div>
+        <div class="index-card-title">التفاعل مع المجتمع المهني</div>
+      </a>
+      <a class="index-card" onclick="showPage('awliya')">
+        <div class="index-card-icon">👨‍👩‍👧</div>
+        <div class="index-card-title">التفاعل مع أولياء الأمور</div>
+      </a>
+      <a class="index-card" onclick="showPage('tanawu')">
+        <div class="index-card-icon">🔄</div>
+        <div class="index-card-title">التنوع في استراتيجيات التدريس</div>
+      </a>
+      <a class="index-card" onclick="showPage('tahsin')">
+        <div class="index-card-icon">📈</div>
+        <div class="index-card-title">تحسين نتائج المتعلمين</div>
+      </a>
+      <a class="index-card" onclick="showPage('iedad')">
+        <div class="index-card-icon">📋</div>
+        <div class="index-card-title">إعداد وتنفيذ خطة التعليم</div>
+      </a>
+      <a class="index-card" onclick="showPage('taqniyat')">
+        <div class="index-card-icon">💻</div>
+        <div class="index-card-title">توظيف تقنيات ووسائل التعليم المناسبة</div>
+      </a>
+      <a class="index-card" onclick="showPage('biya')">
+        <div class="index-card-icon">🏫</div>
+        <div class="index-card-title">تهيئة البيئة التعليمية</div>
+      </a>
+      <a class="index-card" onclick="showPage('idara')">
+        <div class="index-card-icon">🎓</div>
+        <div class="index-card-title">الإدارة الصفية</div>
+      </a>
+      <a class="index-card" onclick="showPage('tahlil')">
+        <div class="index-card-icon">📊</div>
+        <div class="index-card-title">تحليل نتائج المتعلمين وتشخيص مستوياتهم</div>
+      </a>
+      <a class="index-card" onclick="showPage('tanwi-taqwim')">
+        <div class="index-card-icon">🗂️</div>
+        <div class="index-card-title">تنويع أساليب التقويم</div>
+      </a>
+      <a class="index-card" onclick="showPage('khatima')">
+        <div class="index-card-icon">🏁</div>
+        <div class="index-card-title">الخاتمة</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- المقدمة -->
+<div id="page-muqadima" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الملف الشخصي</div>
+      <h2>📝 المقدمة</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">📄</div>
+        <strong>أضف نص المقدمة هنا</strong>
+        <p>اكتب مقدمة ملف الأداء الوظيفي الخاص بك</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('sira')">التالي: السيرة الذاتية ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- السيرة الذاتية -->
+<div id="page-sira" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الملف الشخصي</div>
+      <h2>👤 السيرة الذاتية</h2>
+    </div>
+    <div class="content-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">الاسم</div>
+          <div class="info-value"></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">المؤهل</div>
+          <div class="info-value"></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">التخصص</div>
+          <div class="info-value"></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">تاريخ التعيين</div>
+          <div class="info-value"></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">المسمى الوظيفي</div>
+          <div class="info-value"></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">سنوات الخبرة</div>
+          <div class="info-value"></div>
+        </div>
+        <div class="info-item" style="grid-column: 1/-1;">
+          <div class="info-label">البريد الإلكتروني</div>
+          <div class="info-value"></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('ruya')">التالي: الرؤية والرسالة ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- الرؤية والرسالة -->
+<div id="page-ruya" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الملف الشخصي</div>
+      <h2>🎯 الرؤية والرسالة</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">🎯</div>
+        <strong>أضف رؤيتك ورسالتك التعليمية هنا</strong>
+        <p>صِف رؤيتك ورسالتك كمعلم</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('ahdaf-ama')">التالي: الأهداف العامة ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- الأهداف العامة -->
+<div id="page-ahdaf-ama" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأهداف</div>
+      <h2>📌 الأهداف العامة لسياسة التعليم في المملكة</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">📌</div>
+        <strong>أضف الأهداف العامة لسياسة التعليم في المملكة</strong>
+        <p>يمكنك إضافة وثائق أو نصوص أو صور</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('ahdaf-madda')">التالي: أهداف تدريس المادة ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- أهداف تدريس المادة -->
+<div id="page-ahdaf-madda" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأهداف</div>
+      <h2>📚 أهداف تدريس المادة</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">📚</div>
+        <strong>أضف أهداف تدريس مادتك</strong>
+        <p>حدد الأهداف العامة والخاصة لتدريس مادتك الدراسية</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('mithaq')">التالي: ميثاق الأخلاقيات ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- ميثاق الأخلاقيات -->
+<div id="page-mithaq" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأهداف</div>
+      <h2>⚖️ ميثاق أخلاقيات مهنة التعليم في المملكة</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">⚖️</div>
+        <strong>أضف ميثاق أخلاقيات مهنة التعليم</strong>
+        <p>المبادئ والقيم المهنية التي تلتزم بها</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('wajibat')">التالي: أداء الواجبات ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- أداء الواجبات الوظيفية -->
+<div id="page-wajibat" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>✅ أداء الواجبات الوظيفية</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">✅</div>
+        <strong>أضف وثائق أداء الواجبات الوظيفية</strong>
+        <p>سجلات الحضور، والتقارير، والوثائق الرسمية</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('mujtama')">التالي: التفاعل المهني ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- التفاعل مع المجتمع المهني -->
+<div id="page-mujtama" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">%10 — الأداء الوظيفي</div>
+      <h2>🤝 التفاعل مع المجتمع المهني</h2>
+    </div>
+    <div class="content-card">
+      <p style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:1.25rem;">المستندات المطلوبة في هذا القسم:</p>
+      <div class="sub-items">
+        <div class="sub-item"><div class="sub-item-dot"></div>شهادات حضور الدورات والورش التدريبية</div>
+        <div class="sub-item"><div class="sub-item-dot"></div>سجل مجتمعات التعليم المهنية</div>
+        <div class="sub-item"><div class="sub-item-dot"></div>تقرير تنفيذ درس تطبيقي</div>
+        <div class="sub-item"><div class="sub-item-dot"></div>سجل تبادل الزيارات</div>
+      </div>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">📂</div>
+        <strong>أضف وثائقك هنا</strong>
+        <p>شهادات الدورات، سجلات المجتمعات المهنية، تقارير الدروس التطبيقية</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('awliya')">التالي: التفاعل مع أولياء الأمور ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- التفاعل مع أولياء الأمور -->
+<div id="page-awliya" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>👨‍👩‍👧 التفاعل مع أولياء الأمور</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">👨‍👩‍👧</div>
+        <strong>أضف سجلات التواصل مع أولياء الأمور</strong>
+        <p>محاضر الاجتماعات، سجلات التواصل، رسائل التوعية</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('tanawu')">التالي: التنوع في استراتيجيات التدريس ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- التنوع في استراتيجيات التدريس -->
+<div id="page-tanawu" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>🔄 التنوع في استراتيجيات التدريس</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">🔄</div>
+        <strong>أضف وثائق استراتيجيات التدريس المتنوعة</strong>
+        <p>نماذج من الأنشطة الصفية والاستراتيجيات المستخدمة</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('tahsin')">التالي: تحسين نتائج المتعلمين ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- تحسين نتائج المتعلمين -->
+<div id="page-tahsin" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>📈 تحسين نتائج المتعلمين</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">📈</div>
+        <strong>أضف وثائق تحسين نتائج المتعلمين</strong>
+        <p>تقارير التتبع، وخطط التحسين، والنتائج المقارنة</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('iedad')">التالي: إعداد وتنفيذ خطة التعليم ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- إعداد وتنفيذ خطة التعليم -->
+<div id="page-iedad" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">%10 — الأداء الوظيفي</div>
+      <h2>📋 إعداد وتنفيذ خطة التعليم</h2>
+    </div>
+    <div class="content-card">
+      <p style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:1.25rem;">المستندات المطلوبة في هذا القسم:</p>
+      <div class="sub-items">
+        <div class="sub-item"><div class="sub-item-dot"></div>خطة توزيع المنهج</div>
+        <div class="sub-item"><div class="sub-item-dot"></div>نماذج من الواجبات والاختبارات</div>
+        <div class="sub-item"><div class="sub-item-dot"></div>نماذج من إعداد الدروس</div>
+      </div>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">📋</div>
+        <strong>أضف وثائق خطة التعليم</strong>
+        <p>خطة توزيع المنهج، نماذج الدروس، الواجبات والاختبارات</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('taqniyat')">التالي: توظيف التقنيات ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- توظيف التقنيات -->
+<div id="page-taqniyat" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>💻 توظيف تقنيات ووسائل التعليم المناسبة</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">💻</div>
+        <strong>أضف وثائق توظيف التقنيات التعليمية</strong>
+        <p>نماذج العروض التقديمية، الألعاب التعليمية، منصات التعلم الرقمي</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('biya')">التالي: تهيئة البيئة التعليمية ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- تهيئة البيئة التعليمية -->
+<div id="page-biya" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>🏫 تهيئة البيئة التعليمية</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">🏫</div>
+        <strong>أضف وثائق تهيئة البيئة التعليمية</strong>
+        <p>صور الفصل الدراسي، ترتيب المقاعد، لوحات الجدار التعليمية</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('idara')">التالي: الإدارة الصفية ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- الإدارة الصفية -->
+<div id="page-idara" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>🎓 الإدارة الصفية</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">🎓</div>
+        <strong>أضف وثائق الإدارة الصفية</strong>
+        <p>قواعد الصف، سجلات الضبط والانضباط، نماذج الإدارة</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('tahlil')">التالي: تحليل نتائج المتعلمين ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- تحليل نتائج المتعلمين -->
+<div id="page-tahlil" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>📊 تحليل نتائج المتعلمين وتشخيص مستوياتهم</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">📊</div>
+        <strong>أضف تقارير تحليل النتائج</strong>
+        <p>جداول النتائج، الرسوم البيانية، تقارير المستويات التشخيصية</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('tanwi-taqwim')">التالي: تنويع أساليب التقويم ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- تنويع أساليب التقويم -->
+<div id="page-tanwi-taqwim" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">الأداء الوظيفي</div>
+      <h2>🗂️ تنويع أساليب التقويم</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">🗂️</div>
+        <strong>أضف نماذج أساليب التقويم المتنوعة</strong>
+        <p>التقويم التكويني، الختامي، الأداءات، بطاقات الملاحظة</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav" onclick="showPage('home')">🏠 الرئيسية</button>
+      <button class="btn-nav primary" onclick="showPage('khatima')">التالي: الخاتمة ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- الخاتمة -->
+<div id="page-khatima" class="page">
+  <div class="page-content">
+    <div class="page-header">
+      <div class="page-num">نهاية الملف</div>
+      <h2>🏁 الخاتمة</h2>
+    </div>
+    <div class="content-card">
+      <div class="upload-area">
+        <div style="font-size:2.5rem;">🏁</div>
+        <strong>أضف خاتمة الملف المهني</strong>
+        <p>ملخص الإنجازات والطموحات المستقبلية</p>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-nav primary" onclick="showPage('home')">🏠 العودة للرئيسية</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>ملف الأداء الوظيفي للمعلم — وزارة التعليم، المملكة العربية السعودية</p>
+  <p style="margin-top:0.5rem; opacity:0.6; font-size:0.78rem;">جميع الحقوق محفوظة</p>
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + id);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navItem = document.getElementById('nav-' + id);
+  if (navItem) navItem.classList.add('active');
+  else document.getElementById('nav-home').classList.remove('active');
+}
+</script>
+</body>
+</html>
